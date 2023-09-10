@@ -101,21 +101,21 @@ create table costo(
 	valor_costo money not null unique
 );
 
+--Tabla seccion
+
+create table seccion(
+	id_seccion serial primary key,
+	tipo_seccion varchar(40) not null unique
+);
+
 --Tabla pasaje
 
 create table pasaje(
 	id_pasaje serial primary key,
 	id_vuelo integer not null,
 	id_costo integer not null,
+	id_seccion integer not null,
 	FOREIGN KEY (id_vuelo) REFERENCES vuelo(id_vuelo),
-	FOREIGN KEY (id_costo) REFERENCES costo(id_costo)
-);
-
---Tabla seccion
-
-create table seccion(
-	id_seccion serial primary key,
-	id_pasaje integer not null,
-	tipo_seccion varchar(40) not null unique,
-	FOREIGN KEY (id_pasaje) REFERENCES pasaje(id_pasaje)
+	FOREIGN KEY (id_costo) REFERENCES costo(id_costo),
+	FOREIGN KEY (id_seccion) REFERENCES seccion(id_seccion)
 );
