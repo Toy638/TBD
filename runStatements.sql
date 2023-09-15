@@ -1,22 +1,34 @@
 --Sentencia 1
 
+WITH ViajesChilenosPorAño AS (
+    SELECT
+        EXTRACT(YEAR FROM v.fecha_vuelo) AS año,
+        v.destino AS lugar,
+        COUNT(*) AS cantidad_viajes,
+        RANK() OVER (PARTITION BY EXTRACT(YEAR FROM v.fecha_vuelo) ORDER BY COUNT(*) DESC) AS ranking_lugar
+    FROM
+        vuelo v
+    JOIN
+        pasaje p ON v.id_vuelo = p.id_vuelo
+    JOIN
+        cliente c ON p.id_cliente = c.id_cliente
+    WHERE
+        c.nacionalidad = 'Chile'
+        AND EXTRACT(YEAR FROM v.fecha_vuelo) >= EXTRACT(YEAR FROM CURRENT_DATE) - 4
+    GROUP BY
+        EXTRACT(YEAR FROM v.fecha_vuelo), v.destino
+)
 SELECT
-    EXTRACT(YEAR FROM v.fecha_vuelo) AS año,
-    v.destino AS lugar,
-    COUNT(*) AS cantidad_viajes
+    año,
+    lugar AS Lugar_Más_Visitado,
+    cantidad_viajes AS Cantidad_Viajes
 FROM
-    vuelo v
-JOIN
-    pasaje p ON v.id_vuelo = p.id_vuelo
-JOIN
-    cliente c ON p.id_cliente = c.id_cliente
+    ViajesChilenosPorAño
 WHERE
-    c.nacionalidad = 'Chile'
-    AND EXTRACT(YEAR FROM v.fecha_vuelo) >= EXTRACT(YEAR FROM CURRENT_DATE) - 4
-GROUP BY
-    EXTRACT(YEAR FROM v.fecha_vuelo), v.destino
+    ranking_lugar = 1
 ORDER BY
-    EXTRACT(YEAR FROM v.fecha_vuelo) DESC, cantidad_viajes DESC;
+    año DESC;
+
 	
 --Sentencia 2
 
@@ -34,27 +46,41 @@ WHERE
 GROUP BY
     s.tipo_seccion
 ORDER BY
-    cantidad_compras DESC;
+    cantidad_compras DESC
+LIMIT 1;
 	
 --Sentencia 3
 
+WITH GastoTotalPorMesYOrigen AS (
+    SELECT
+        EXTRACT(YEAR FROM v.fecha_vuelo) AS año,
+        EXTRACT(MONTH FROM v.fecha_vuelo) AS mes,
+        v.origen AS país,
+        SUM(co.valor_costo) AS gasto_total,
+        RANK() OVER (PARTITION BY EXTRACT(YEAR FROM v.fecha_vuelo), EXTRACT(MONTH FROM v.fecha_vuelo) ORDER BY SUM(co.valor_costo) DESC) AS ranking_gasto
+    FROM
+        vuelo v
+    JOIN
+        pasaje p ON v.id_vuelo = p.id_vuelo
+    JOIN
+        costo co ON p.id_costo = co.id_costo
+    WHERE
+        EXTRACT(YEAR FROM v.fecha_vuelo) >= EXTRACT(YEAR FROM CURRENT_DATE) - 4
+    GROUP BY
+        EXTRACT(YEAR FROM v.fecha_vuelo), EXTRACT(MONTH FROM v.fecha_vuelo), v.origen
+)
 SELECT
-    EXTRACT(YEAR FROM v.fecha_vuelo) AS año,
-    EXTRACT(MONTH FROM v.fecha_vuelo) AS mes,
-    v.origen AS país,
-    SUM(co.valor_costo) AS gasto_total
+    año,
+    mes,
+    país AS País_Mayor_Gasto,
+    gasto_total AS Gasto_Total
 FROM
-    vuelo v
-JOIN
-    pasaje p ON v.id_vuelo = p.id_vuelo
-JOIN
-    costo co ON p.id_costo = co.id_costo
+    GastoTotalPorMesYOrigen
 WHERE
-    EXTRACT(YEAR FROM v.fecha_vuelo) >= EXTRACT(YEAR FROM CURRENT_DATE) - 4
-GROUP BY
-    EXTRACT(YEAR FROM v.fecha_vuelo), EXTRACT(MONTH FROM v.fecha_vuelo), v.origen
+    ranking_gasto = 1
 ORDER BY
-    EXTRACT(YEAR FROM v.fecha_vuelo) DESC, EXTRACT(MONTH FROM v.fecha_vuelo) ASC, gasto_total DESC;
+    año DESC, mes ASC;
+
 
 --Sentencia 4 (funciona, pero no tenemos en la base de datos casos en los que 
 --             pasajeros viajen más de 4 veces al mes, para ver otro caso se 
@@ -261,10 +287,4 @@ FROM
     RankingModelosPorCompania r
 WHERE
     ranking_modelo = 1;
-
-
-
-
-
-
 
