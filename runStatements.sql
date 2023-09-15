@@ -122,7 +122,7 @@ ORDER BY
     cantidad_vuelos ASC
 LIMIT 1;
 
---Sentencia 6 (falta ver lo del año de los sueldos)
+--Sentencia 6
 
 WITH ranked_salaries AS (
     SELECT
