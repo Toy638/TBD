@@ -575,7 +575,6 @@ BEGIN
     END LOOP;
 END $$;
 
-delete from sueldo
 --Datos tabla emp_vuelo
 
 INSERT INTO emp_vuelo (id_vuelo,id_empleado)
