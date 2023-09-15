@@ -1,8 +1,8 @@
 --Tabla compañia
 
-create table compañia(
-	id_compañia serial primary key,
-	nombre_compañia varchar(40) not null unique
+create table compania(
+	id_compania serial primary key,
+	nombre_compania varchar(40) not null unique
 );
 
 --Tabla cliente
@@ -26,9 +26,9 @@ create table avion(
 	nombre_avion varchar(40) not null unique,
 	capacidad_pas integer not null,
 	fecha_adquisicion date not null,
-	id_compañia integer not null,
+	id_compania integer not null,
 	id_modelo integer not null,
-	FOREIGN KEY (id_compañia) REFERENCES compañia(id_compañia),
+	FOREIGN KEY (id_compania) REFERENCES compania(id_compania),
 	FOREIGN KEY (id_modelo) REFERENCES modelo(id_modelo)
 );
 
@@ -55,9 +55,9 @@ create table cargo(
 create table empleado(
 	id_empleado serial primary key,
 	nombre_empleado varchar(50) not null,
-	id_compañia integer not null,
+	id_compania integer not null,
 	id_cargo integer not null,
-	FOREIGN KEY (id_compañia) REFERENCES compañia(id_compañia),
+	FOREIGN KEY (id_compania) REFERENCES compania(id_compania),
 	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
 );
 
@@ -98,7 +98,6 @@ create table seccion(
 
 create table pasaje(
 	id_pasaje serial primary key,
-	fecha_pasaje date not null,
 	id_vuelo integer not null,
 	id_costo integer not null,
 	id_seccion integer not null,
@@ -108,3 +107,5 @@ create table pasaje(
 	FOREIGN KEY (id_seccion) REFERENCES seccion(id_seccion),
 	FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
+
+--drop table avion, cargo, cliente, compania, costo, emp_vuelo, empleado, modelo, pasaje, seccion, sueldo, vuelo
