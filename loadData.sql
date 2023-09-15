@@ -11,9 +11,7 @@ VALUES
   ('Fallon Bentley','Korea, South'),
   ('Chandler Clayton','Bolivia'),
   ('Marvin Gardner','Japan'),
-  ('Susan Jarvis','China');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Susan Jarvis','China'),
   ('Cara Colon','China'),
   ('Summer Fuller','Spain'),
   ('Rashad Barber','Venezuela'),
@@ -23,9 +21,7 @@ VALUES
   ('Vladimir Bird','United States'),
   ('Ingrid Marshall','Chile'),
   ('Gavin Barron','United States'),
-  ('Leonard Campos','Venezuela');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Leonard Campos','Venezuela'),
   ('Vielka Farmer','Japan'),
   ('Alea Weber','Korea, South'),
   ('Mikayla Conrad','China'),
@@ -35,9 +31,7 @@ VALUES
   ('Dai Baxter','Spain'),
   ('Colin Torres','United States'),
   ('Chadwick Powers','Chile'),
-  ('Alexis Baird','Bolivia');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Alexis Baird','Bolivia'),
   ('Lester Melendez','Argentina'),
   ('Elaine Hubbard','Korea, North'),
   ('Lisandra Moran','Korea, North'),
@@ -47,9 +41,7 @@ VALUES
   ('Beck Dunn','Venezuela'),
   ('Lucas Duncan','Japan'),
   ('Wang Rodriquez','Bolivia'),
-  ('Berk Rowe','Bolivia');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Berk Rowe','Bolivia'),
   ('Hedy Green','Bolivia'),
   ('Jenette Sherman','Argentina'),
   ('Xaviera Pratt','Colombia'),
@@ -59,9 +51,7 @@ VALUES
   ('Jaquelyn Sparks','Peru'),
   ('Clarke Galloway','Chile'),
   ('Eugenia Rosa','Peru'),
-  ('Neil Conrad','Chile');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Neil Conrad','Chile'),
   ('Hyatt Schultz','Argentina'),
   ('Peter Crosby','Spain'),
   ('Nadine Marks','Chile'),
@@ -71,9 +61,7 @@ VALUES
   ('Wang Boyer','Spain'),
   ('Chaim Wright','Peru'),
   ('Cody Pugh','Korea, South'),
-  ('Berk Cline','Bolivia');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Berk Cline','Bolivia'),
   ('Flavia Mcleod','United States'),
   ('Kadeem Marshall','Chile'),
   ('Imogene Vasquez','Japan'),
@@ -83,9 +71,7 @@ VALUES
   ('Noelani Jordan','Argentina'),
   ('Charde Briggs','Korea, North'),
   ('Salvador Farmer','United States'),
-  ('Joshua Nguyen','United States');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Joshua Nguyen','United States'),
   ('Camilla Bauer','Venezuela'),
   ('Robert Duffy','Colombia'),
   ('Zorita Carlson','Japan'),
@@ -95,9 +81,7 @@ VALUES
   ('Jacqueline Pruitt','United States'),
   ('Avye Vance','Argentina'),
   ('Ralph Boone','United States'),
-  ('Wesley Gonzales','Bolivia');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Wesley Gonzales','Bolivia'),
   ('Lana Wilcox','Spain'),
   ('Marsden Peck','Peru'),
   ('Linus Sykes','Spain'),
@@ -107,9 +91,7 @@ VALUES
   ('Adena Todd','Japan'),
   ('Ursula Frost','China'),
   ('Chantale Cash','Venezuela'),
-  ('Carissa Rodriguez','Japan');
-INSERT INTO cliente (nombre_cliente,nacionalidad)
-VALUES
+  ('Carissa Rodriguez','Japan'),
   ('Alexa Jefferson','Bolivia'),
   ('Ginger Lindsay','Chile'),
   ('Colby Harrison','Chile'),
@@ -182,9 +164,7 @@ VALUES
   ('QuantumSky',176,'2015-06-03',9,10),
   ('AuroraGlide',127,'2016-05-16',7,2),
   ('HorizonXpress',114,'2019-11-27',4,4),
-  ('SilverFalcon',146,'2010-01-02',9,9);
-INSERT INTO avion (nombre_avion,capacidad_pas,fecha_adquisicion,id_compania,id_modelo)
-VALUES
+  ('SilverFalcon',146,'2010-01-02',9,9),
   ('TurboStar',141,'2023-05-08',5,8),
   ('AirVoyager',99,'2014-07-27',8,4),
   ('NeoSkyliner',107,'2014-06-21',4,1),
@@ -209,9 +189,7 @@ VALUES
   ('2020-09-23','Peru','Argentina',8),
   ('2010-03-25','Brazil','Peru',18),
   ('2021-04-29','Panama','Peru',10),
-  ('2023-05-27','Peru','Bolivia',11);
-INSERT INTO vuelo (fecha_vuelo,origen,destino,id_avion)
-VALUES
+  ('2023-05-27','Peru','Bolivia',11),
   ('2015-07-29','Brazil','Chile',12),
   ('2010-12-17','Panama','United States',2),
   ('2010-06-11','United States','Bolivia',18),
@@ -221,9 +199,7 @@ VALUES
   ('2017-02-05','United States','Argentina',9),
   ('2021-06-18','Panama','Brazil',2),
   ('2015-12-23','Bolivia','Bolivia',6),
-  ('2015-04-02','United States','Uruguay',17);
-INSERT INTO vuelo (fecha_vuelo,origen,destino,id_avion)
-VALUES
+  ('2015-04-02','United States','Uruguay',17),
   ('2021-05-05','United States','Chile',13),
   ('2019-04-08','Bolivia','Peru',10),
   ('2010-03-11','Panama','Peru',6),
@@ -233,9 +209,7 @@ VALUES
   ('2018-11-21','Brazil','Uruguay',20),
   ('2020-03-10','Mexico','Chile',19),
   ('2010-04-12','Chile','Uruguay',14),
-  ('2012-03-31','Uruguay','Costa Rica',12);
-INSERT INTO vuelo (fecha_vuelo,origen,destino,id_avion)
-VALUES
+  ('2012-03-31','Uruguay','Costa Rica',12),
   ('2015-11-08','United States','Brazil',17),
   ('2019-02-03','Chile','Uruguay',11),
   ('2016-02-18','Bolivia','Bolivia',7),
@@ -245,9 +219,7 @@ VALUES
   ('2021-08-03','Peru','Brazil',4),
   ('2010-09-23','Peru','Brazil',2),
   ('2010-11-18','Peru','Peru',3),
-  ('2023-05-18','Mexico','United States',14);
-INSERT INTO vuelo (fecha_vuelo,origen,destino,id_avion)
-VALUES
+  ('2023-05-18','Mexico','United States',14),
   ('2011-04-18','Mexico','Costa Rica',15),
   ('2013-10-07','Panama','Bolivia',13),
   ('2018-10-26','United States','Chile',17),
@@ -272,9 +244,7 @@ VALUES
   (22,3,1,6),
   (11,3,4,40),
   (34,2,2,64),
-  (38,1,2,75);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (38,1,2,75),
   (17,1,2,67),
   (22,3,2,72),
   (40,3,2,25),
@@ -284,9 +254,7 @@ VALUES
   (13,3,4,24),
   (34,2,3,10),
   (33,3,3,72),
-  (45,2,3,85);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (45,2,3,85),
   (46,2,2,33),
   (5,1,2,16),
   (33,3,4,91),
@@ -296,9 +264,7 @@ VALUES
   (47,3,3,25),
   (33,4,3,43),
   (42,1,3,95),
-  (20,2,2,16);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (20,2,2,16),
   (2,4,2,34),
   (15,2,2,78),
   (31,3,4,71),
@@ -308,9 +274,7 @@ VALUES
   (48,3,2,24),
   (13,2,3,7),
   (29,1,2,31),
-  (40,3,4,10);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (40,3,4,10),
   (31,4,2,91),
   (4,3,3,58),
   (21,1,2,13),
@@ -320,9 +284,7 @@ VALUES
   (33,1,1,96),
   (6,4,2,25),
   (4,2,3,98),
-  (19,3,2,9);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (19,3,2,9),
   (20,4,2,17),
   (31,4,4,41),
   (28,2,4,49),
@@ -332,9 +294,7 @@ VALUES
   (11,2,2,78),
   (22,2,3,12),
   (42,3,3,45),
-  (1,3,3,38);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (1,3,3,38),
   (12,3,3,91),
   (7,1,2,100),
   (6,3,4,96),
@@ -344,9 +304,7 @@ VALUES
   (48,3,3,39),
   (27,2,2,45),
   (26,4,3,74),
-  (29,1,1,40);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (29,1,1,40),
   (3,2,1,59),
   (31,3,4,69),
   (21,3,3,68),
@@ -356,9 +314,7 @@ VALUES
   (43,2,1,84),
   (20,3,3,79),
   (32,2,3,42),
-  (24,1,3,16);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (24,1,3,16),
   (4,1,2,76),
   (27,2,2,63),
   (32,2,2,37),
@@ -368,9 +324,7 @@ VALUES
   (46,2,4,6),
   (6,2,2,24),
   (24,1,3,80),
-  (46,2,4,99);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (46,2,4,99),
   (35,3,2,77),
   (1,4,4,48),
   (40,4,1,98),
@@ -380,9 +334,7 @@ VALUES
   (28,1,2,7),
   (19,1,4,79),
   (8,1,1,12),
-  (10,3,1,91);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (10,3,1,91),
   (21,4,1,4),
   (17,3,3,24),
   (2,3,4,31),
@@ -392,9 +344,7 @@ VALUES
   (42,3,1,10),
   (7,1,3,46),
   (10,3,4,4),
-  (35,2,2,44);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (35,2,2,44),
   (8,1,2,87),
   (38,1,3,88),
   (41,1,2,11),
@@ -404,9 +354,7 @@ VALUES
   (44,3,4,39),
   (11,1,4,92),
   (44,3,2,13),
-  (8,3,3,47);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (8,3,3,47),
   (50,3,1,71),
   (8,2,4,98),
   (49,4,3,15),
@@ -416,9 +364,7 @@ VALUES
   (31,3,2,28),
   (32,2,4,26),
   (5,3,2,94),
-  (16,2,3,42);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (16,2,3,42),
   (47,1,4,31),
   (9,3,3,5),
   (17,3,2,49),
@@ -428,9 +374,7 @@ VALUES
   (26,4,3,28),
   (47,2,2,17),
   (21,1,2,50),
-  (10,2,2,45);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (10,2,2,45),
   (27,3,2,87),
   (27,4,3,50),
   (29,4,3,54),
@@ -440,9 +384,7 @@ VALUES
   (36,2,4,64),
   (18,3,3,46),
   (32,3,2,62),
-  (47,3,2,17);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (47,3,2,17),
   (5,4,1,27),
   (20,4,4,39),
   (38,3,3,40),
@@ -452,9 +394,7 @@ VALUES
   (44,2,3,43),
   (16,3,3,14),
   (38,3,3,40),
-  (2,1,2,20);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (2,1,2,20),
   (8,4,3,70),
   (13,3,3,67),
   (37,2,2,25),
@@ -464,9 +404,7 @@ VALUES
   (45,4,4,48),
   (18,4,4,65),
   (5,3,4,39),
-  (49,4,4,76);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (49,4,4,76),
   (20,3,2,76),
   (37,4,2,29),
   (23,4,2,76),
@@ -476,9 +414,7 @@ VALUES
   (4,1,3,34),
   (2,3,3,63),
   (18,4,2,94),
-  (17,2,3,63);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (17,2,3,63),
   (22,4,3,21),
   (13,4,2,5),
   (31,3,3,38),
@@ -488,9 +424,7 @@ VALUES
   (43,2,3,50),
   (10,2,4,43),
   (46,4,1,20),
-  (28,1,1,51);
-INSERT INTO pasaje (id_vuelo,id_costo,id_seccion,id_cliente)
-VALUES
+  (28,1,1,51),
   (29,3,3,51),
   (50,2,3,6),
   (12,3,1,86),
@@ -525,9 +459,7 @@ VALUES
   ('Haley Puckett',2,3),
   ('Ciara O''connor',1,3),
   ('Griffith Kelley',5,4),
-  ('Adena Sherman',6,2);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Adena Sherman',6,2),
   ('Ina Calhoun',5,3),
   ('Angela Bowman',2,3),
   ('Kibo Mcneil',2,1),
@@ -537,9 +469,7 @@ VALUES
   ('Griffith Wilson',7,2),
   ('Christine Stafford',3,1),
   ('Nicholas Cooper',7,3),
-  ('Moana Delaney',7,4);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Moana Delaney',7,4),
   ('Kellie Haley',10,4),
   ('Fredericka Byrd',2,3),
   ('Isadora Burks',2,1),
@@ -549,9 +479,7 @@ VALUES
   ('Phillip Richard',8,1),
   ('Carly Bowman',5,3),
   ('Kenneth Carrillo',9,3),
-  ('Gay Leach',1,1);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Gay Leach',1,1),
   ('Laura Brown',8,2),
   ('Scott Davenport',9,3),
   ('Neville Trujillo',5,2),
@@ -561,9 +489,7 @@ VALUES
   ('Aristotle Delacruz',4,2),
   ('Helen Pruitt',1,2),
   ('Tanek Wade',10,2),
-  ('Michelle Holcomb',3,2);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Michelle Holcomb',3,2),
   ('Brielle Holloway',7,3),
   ('Madaline Chang',9,4),
   ('Xenos Pollard',3,4),
@@ -573,9 +499,7 @@ VALUES
   ('Bert Powell',5,2),
   ('Roth Mclaughlin',6,1),
   ('Georgia Jefferson',2,2),
-  ('Calvin Murphy',7,4);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Calvin Murphy',7,4),
   ('Adele Carey',5,2),
   ('Yvette Charles',5,2),
   ('Hammett David',1,2),
@@ -585,9 +509,7 @@ VALUES
   ('Zephr Vincent',6,4),
   ('Geoffrey Lester',3,4),
   ('Graham Pruitt',2,3),
-  ('Skyler Cooke',7,1);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Skyler Cooke',7,1),
   ('Kelly Wheeler',9,4),
   ('Brennan O''Neill',4,4),
   ('Eliana Solomon',5,1),
@@ -597,9 +519,7 @@ VALUES
   ('Hamilton Emerson',7,1),
   ('Robert Collins',3,3),
   ('Illiana Mays',10,1),
-  ('Carolyn Marsh',6,1);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Carolyn Marsh',6,1),
   ('Lionel Clark',7,2),
   ('Chandler Britt',4,5),
   ('Octavius Levine',4,4),
@@ -609,9 +529,7 @@ VALUES
   ('Chandler Lloyd',1,3),
   ('Owen Hensley',6,1),
   ('Xantha Bolton',2,1),
-  ('Teegan Kirkland',4,3);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Teegan Kirkland',4,3),
   ('Jonas Love',7,2),
   ('Drake Shields',9,1),
   ('Oprah Church',4,2),
@@ -621,9 +539,7 @@ VALUES
   ('Timothy Hernandez',5,4),
   ('Travis Tanner',6,4),
   ('Owen Farley',10,3),
-  ('Georgia Woodard',10,4);
-INSERT INTO empleado (nombre_empleado,id_compania,id_cargo)
-VALUES
+  ('Georgia Woodard',10,4),
   ('Rahim Wheeler',7,3),
   ('Duncan Sosa',4,2),
   ('Darryl Campos',1,4),
@@ -635,7 +551,7 @@ VALUES
   ('Xander Maddox',5,3),
   ('Linus Park',2,2);
   
--- Generador de sueldos por 10 años , anuelamente.
+-- Generador de sueldos por 10 años , mensual.
 
 DO $$ 
 DECLARE
@@ -643,9 +559,9 @@ DECLARE
 BEGIN
     FOR empleado_id IN 1..100 LOOP
         DECLARE
-            fecha DATE := '2023-01-01'; -- Reinicia la fecha al valor inicial para cada empleado
+            fecha DATE := '2013-01-01'; -- Reinicia la fecha al valor inicial para cada empleado
         BEGIN
-            FOR year IN 1..10 LOOP
+            FOR month IN 1..132 LOOP
                 INSERT INTO sueldo (valor_sueldo, fecha_sueldo, id_empleado)
                 VALUES 
                 (
@@ -653,12 +569,13 @@ BEGIN
                     fecha,
                     empleado_id
                 );
-                fecha := fecha + INTERVAL '1 year'; -- Avanza al siguiente año
+                fecha := fecha + INTERVAL '1 month'; -- Avanza al siguiente mes
             END LOOP;
         END;
     END LOOP;
 END $$;
 
+delete from sueldo
 --Datos tabla emp_vuelo
 
 INSERT INTO emp_vuelo (id_vuelo,id_empleado)
@@ -672,9 +589,7 @@ VALUES
   (17,24),
   (5,6),
   (25,46),
-  (16,24);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (16,24),
   (46,43),
   (10,40),
   (11,10),
@@ -684,9 +599,7 @@ VALUES
   (40,32),
   (22,58),
   (39,74),
-  (9,74);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (9,74),
   (30,4),
   (42,26),
   (31,94),
@@ -696,9 +609,7 @@ VALUES
   (22,45),
   (4,78),
   (24,40),
-  (44,2);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (44,2),
   (14,97),
   (3,48),
   (40,46),
@@ -708,9 +619,7 @@ VALUES
   (36,92),
   (32,6),
   (29,72),
-  (25,55);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (25,55),
   (32,81),
   (42,57),
   (22,47),
@@ -720,9 +629,7 @@ VALUES
   (7,76),
   (11,26),
   (27,8),
-  (11,15);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (11,15),
   (15,72),
   (20,40),
   (27,91),
@@ -732,9 +639,7 @@ VALUES
   (6,28),
   (17,41),
   (34,23),
-  (9,77);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (9,77),
   (26,35),
   (37,15),
   (50,86),
@@ -744,9 +649,7 @@ VALUES
   (27,67),
   (49,53),
   (46,54),
-  (33,36);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (33,36),
   (50,14),
   (41,66),
   (11,13),
@@ -756,9 +659,7 @@ VALUES
   (30,21),
   (17,92),
   (48,65),
-  (21,93);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (21,93),
   (47,7),
   (25,67),
   (8,52),
@@ -768,9 +669,7 @@ VALUES
   (24,96),
   (38,66),
   (39,76),
-  (33,80);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (33,80),
   (47,87),
   (41,86),
   (14,69),
@@ -780,9 +679,7 @@ VALUES
   (8,49),
   (47,32),
   (23,70),
-  (15,88);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (15,88),
   (47,48),
   (18,57),
   (25,12),
@@ -792,9 +689,7 @@ VALUES
   (2,48),
   (43,70),
   (15,29),
-  (15,61);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (15,61),
   (42,74),
   (47,5),
   (4,69),
@@ -804,9 +699,7 @@ VALUES
   (3,94),
   (26,19),
   (14,1),
-  (39,71);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (39,71),
   (27,31),
   (21,17),
   (47,47),
@@ -816,9 +709,7 @@ VALUES
   (42,71),
   (3,8),
   (33,76),
-  (3,83);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (3,83),
   (17,19),
   (25,87),
   (10,42),
@@ -828,9 +719,7 @@ VALUES
   (26,50),
   (29,65),
   (33,49),
-  (10,53);
-INSERT INTO emp_vuelo (id_vuelo,id_empleado)
-VALUES
+  (10,53),
   (41,70),
   (48,52),
   (34,57),
