@@ -1,0 +1,7 @@
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/entities/UsuarioEntity.java
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/Lab1Application.java
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/config/security/SecurityConfig.java
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/repositories/UsuarioRepositoryImpl.java
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/config/Sql2oConfiguration.java
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/controllers/UsuarioController.java
+/mnt/disco_duro/TBD/lab 1/lab1/src/main/java/com/tbd/lab1/repositories/UsuarioRepository.java
