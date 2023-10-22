@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,7 +71,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/api/register")
-    public ResponseEntity<TokenInfo> createUser(@RequestBody UsuarioEntity usuario){
+    public ResponseEntity<Map<String, String>> createUser(@RequestBody UsuarioEntity usuario){
         try{
             usuarioRepository.register(usuario);
 
@@ -81,9 +83,21 @@ public class UsuarioController {
 
             final String jwt = jwtUtilService.generateToken(userDetails);
 
-            return ResponseEntity.ok(new TokenInfo(jwt));
-        }catch (RuntimeException e){
-            return ResponseEntity.badRequest().build();
+            UsuarioEntity existingUser = usuarioRepository.getByEmail(usuario.getEmail());
+            if (existingUser != null) {
+                Map<String, String> response = new HashMap<>();
+                response.put("status", "error");
+                return ResponseEntity.ok(response);
+            }
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "registrado");
+
+            return ResponseEntity.ok(response);
+        }catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "error");
+            response.put("message", "Error en el registro.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 }
