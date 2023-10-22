@@ -6,7 +6,6 @@ public class UsuarioEntity {
 
     private Integer id;
 
-
     private String email;
 
     private String password;
