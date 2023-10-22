@@ -1,110 +1,77 @@
---Tabla compañia
-
-create table compañia(
-	id_compañia serial primary key,
-	nombre_compañia varchar(40) not null unique
+-- Modificada la tabla de "institución" para permitir que una institución tenga muchos usuarios
+CREATE TABLE "institucion" (
+  "id_institucion" serial PRIMARY KEY,
+  "nombre" varchar(255),
+  "fecha" DATE,
+  "direccion" varchar(255),
+  "telefono" varchar(20)
 );
 
---Tabla cliente
-create table cliente(
-	id_cliente serial primary key,
-	nombre_cliente varchar(50) not null,
-	nacionalidad varchar(100) not null
+-- Modificada la tabla de "usuario" para permitir que un usuario esté asociado a una institución
+CREATE TABLE "usuario" (
+  "id_usuario" serial PRIMARY KEY,
+  "email" varchar(45),
+  "password" varchar(45),
+  "rol" varchar(45),
+  "id_institucion" integer
 );
 
---Tabla modelo
+-- Se establece una relación de clave externa entre "usuario" e "institucion"
+ALTER TABLE "usuario" ADD FOREIGN KEY ("id_institucion") REFERENCES "institucion" ("id_institucion");
 
-create table modelo(
-	id_modelo serial primary key,
-	nombre_modelo varchar(40) not null unique
+-- Resto de tus tablas originales sin modificaciones
+CREATE TABLE "habilidad" (
+  "id_habilidad" serial PRIMARY KEY,
+  "habilidad" varchar(255)
 );
 
---Tabla avion
-
-create table avion(
-	id_avion serial primary key,
-	nombre_avion varchar(40) not null unique,
-	capacidad_pas integer not null,
-	fecha_adquisicion date not null,
-	id_compañia integer not null,
-	id_modelo integer not null,
-	FOREIGN KEY (id_compañia) REFERENCES compañia(id_compañia),
-	FOREIGN KEY (id_modelo) REFERENCES modelo(id_modelo)
+CREATE TABLE "voluntario" (
+  "id_voluntario" serial PRIMARY KEY,
+  "nombre" varchar(255),
+  "apellido" varchar(255),
+  "telefono" varchar(20),
+  "direccion" varchar(255),
+  "id_usuario" integer unique
 );
 
---Tabla vuelo
-
-create table vuelo(
-	id_vuelo serial primary key,
-	fecha_vuelo date not null,
-	origen varchar(40) not null,
-	destino varchar(40) not null,
-	id_avion integer not null,
-	FOREIGN KEY (id_avion) REFERENCES avion(id_avion)
+CREATE TABLE "emergencia" (
+  "id_emergencia" serial PRIMARY KEY,
+  "asunto" varchar(255),
+  "descripcion" TEXT,
+  "direccion" varchar(255),
+  "fecha" DATE,
+  "active" BOOLEAN,
+  "id_institucion" integer unique
 );
 
---Tabla cargo
-
-create table cargo(
-	id_cargo serial primary key,
-	nombre_cargo varchar(40) not null unique
+CREATE TABLE "tarea" (
+  "id_tarea" serial PRIMARY KEY,
+  "asunto_tarea" varchar(255),
+  "estado_tarea" BOOLEAN,
+  "id_emergencia" integer unique
 );
 
---Tabla empleado
-
-create table empleado(
-	id_empleado serial primary key,
-	nombre_empleado varchar(50) not null,
-	id_compañia integer not null,
-	id_cargo integer not null,
-	FOREIGN KEY (id_compañia) REFERENCES compañia(id_compañia),
-	FOREIGN KEY (id_cargo) REFERENCES cargo(id_cargo)
+CREATE TABLE "eme_habilidad" (
+  "id_eme_habilidad" serial PRIMARY KEY,
+  "id_habilidad" integer,
+  "id_emergencia" integer unique
 );
 
---Tabla sueldo
-
-create table sueldo(
-	id_sueldo serial primary key,
-	valor_sueldo integer not null,
-	fecha_sueldo date not null,
-	id_empleado integer not null,
-	FOREIGN KEY (id_empleado) REFERENCES empleado(id_empleado)
+CREATE TABLE "ranking" (
+  "id_ranking" serial PRIMARY KEY,
+  "id_tarea" integer,
+  "id_voluntario" integer,
+  "puntaje" integer
 );
 
---Tabla emp_vuelo
-
-create table emp_vuelo(
-	id_vuelo integer not null,
-	id_empleado integer not null,
-	FOREIGN KEY (id_vuelo) REFERENCES vuelo(id_vuelo),
-	FOREIGN KEY (id_empleado) REFERENCES empleado(id_empleado)
+CREATE TABLE "tarea_habilidad" (
+  "id_tarea_habilidad" serial PRIMARY KEY,
+  "id_tarea" integer unique,
+  "id_habilidad" integer unique
 );
 
---Tabla costo
-
-create table costo(
-	id_costo serial primary key,
-	valor_costo integer not null unique
-);
-
---Tabla seccion
-
-create table seccion(
-	id_seccion serial primary key,
-	tipo_seccion varchar(40) not null unique
-);
-
---Tabla pasaje
-
-create table pasaje(
-	id_pasaje serial primary key,
-	fecha_pasaje date not null,
-	id_vuelo integer not null,
-	id_costo integer not null,
-	id_seccion integer not null,
-	id_cliente integer not null,
-	FOREIGN KEY (id_vuelo) REFERENCES vuelo(id_vuelo),
-	FOREIGN KEY (id_costo) REFERENCES costo(id_costo),
-	FOREIGN KEY (id_seccion) REFERENCES seccion(id_seccion),
-	FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+CREATE TABLE "vol_habilidad" (
+  "id_vol_habilidad" serial,
+  "id_voluntario" integer,
+  "id_habilidad" integer unique
 );
