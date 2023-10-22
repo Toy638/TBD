@@ -44,7 +44,7 @@ public class JwtUtilService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        UsuarioEntity usuario = usuarioRepository.getByEmail(userDetails.getUsername());
+        UsuarioEntity usuario = usuarioRepository.findByEmail(userDetails.getUsername());
         // Agregando informacion adicional como "claim"
         var rol = userDetails.getAuthorities().stream().toList().get(0);
         claims.put("roles", rol);

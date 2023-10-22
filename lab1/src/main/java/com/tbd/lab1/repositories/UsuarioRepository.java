@@ -9,11 +9,12 @@ public interface UsuarioRepository {
 
     public UsuarioEntity findById(Long id);
 
-    public UsuarioEntity getByEmail(String email);
+    public UsuarioEntity findByEmail(String email);
 
     public void register(UsuarioEntity usuario);
 
     public void update(UsuarioEntity usuario);
 
     public void delete(Long id);
+
 }

@@ -25,6 +25,8 @@ public class HabilidadEntity {
         this.habilidad = habilidad;
     }
 
+
+
     @Override
     public String toString() {
         return "HabilidadEntity{" +

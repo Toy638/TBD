@@ -1,11 +1,14 @@
 package com.tbd.lab1.repositories;
-
 import com.tbd.lab1.entities.UsuarioEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
 import java.util.List;
+
 
 @Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository{
@@ -30,7 +33,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
     }
 
     @Override
-    public UsuarioEntity getByEmail(String email) {
+    public UsuarioEntity findByEmail(String email) {
         try (Connection connection = sql2o.open()) {
             String query = "SELECT * FROM usuario WHERE email = :email";
             return connection.createQuery(query).addParameter("email", email).executeAndFetchFirst(UsuarioEntity.class);
@@ -39,11 +42,14 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     @Override
     public void register(UsuarioEntity usuario) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String pass = usuario.getPassword();
+        String encrip = passwordEncoder.encode(pass);
         try (Connection connection = sql2o.beginTransaction()) {
             String query = "INSERT INTO usuario (email, password, rol) VALUES (:email, :password, :rol)";
             connection.createQuery(query, true)
                     .addParameter("email", usuario.getEmail())
-                    .addParameter("password", usuario.getPassword())
+                    .addParameter("password", encrip)
                     .addParameter("rol", usuario.getRol())
                     .executeUpdate();
             connection.commit();
@@ -72,4 +78,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
     public void delete(Long id) {
 
     }
+
+/*
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UsuarioEntity user = UsuarioRepository.findByEmail(email);
+        return null;
+    }*/
 }

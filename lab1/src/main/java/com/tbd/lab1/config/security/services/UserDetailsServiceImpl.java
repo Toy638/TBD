@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        UsuarioEntity usuario = usuarioRepository.getByEmail(email);
+        UsuarioEntity usuario = usuarioRepository.findByEmail(email);
         String encodedPass = passwordEncoder.encode(usuario.getPassword());
 
         if (usuario == null) {

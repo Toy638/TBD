@@ -54,8 +54,8 @@ public class UsuarioController {
             Map<String, String> response = new HashMap<>();
             response.put("status", "ok");
             response.put("token", jwt);
-            response.put("id", usuarioRepository.getByEmail(authenticationReq.getEmail()).getId().toString());
-            response.put("rol", usuarioRepository.getByEmail(authenticationReq.getEmail()).getRol());
+            response.put("id", usuarioRepository.findByEmail(authenticationReq.getEmail()).getId().toString());
+            response.put("rol", usuarioRepository.findByEmail(authenticationReq.getEmail()).getRol());
 
             return ResponseEntity.ok(response);
         }
@@ -72,7 +72,7 @@ public class UsuarioController {
     public ResponseEntity<Map<String, String>> createUser(@RequestBody UsuarioEntity usuario){
         try{
 
-            UsuarioEntity existingUser = usuarioRepository.getByEmail(usuario.getEmail());
+            UsuarioEntity existingUser = usuarioRepository.findByEmail(usuario.getEmail());
             if (existingUser != null) {
                 Map<String, String> response = new HashMap<>();
                 response.put("status", "error");
