@@ -9,7 +9,7 @@ CREATE TABLE "institucion" (
 
 -- Modificada la tabla de "usuario" para permitir que un usuario esté asociado a una institución
 CREATE TABLE "usuario" (
-  "id_usuario" serial PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "email" varchar(45),
   "password" varchar(45),
   "rol" varchar(45),
@@ -30,7 +30,7 @@ CREATE TABLE "voluntario" (
   "telefono" varchar(20),
   "direccion" varchar(255),
   "id_usuario" integer,
-  FOREIGN KEY ("id_usuario") REFERENCES "usuario" ("id_usuario")
+  FOREIGN KEY ("id_usuario") REFERENCES "usuario" ("id")
 );
 
 CREATE TABLE "emergencia" (
@@ -39,7 +39,7 @@ CREATE TABLE "emergencia" (
   "descripcion" TEXT,
   "direccion" varchar(255),
   "fecha" DATE,
-  "active" BOOLEAN,
+  "activa" BOOLEAN,
   "id_institucion" integer,
   FOREIGN KEY ("id_institucion") REFERENCES "institucion" ("id_institucion")
 );
