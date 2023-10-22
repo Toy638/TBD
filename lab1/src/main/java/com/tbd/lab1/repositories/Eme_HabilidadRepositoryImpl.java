@@ -30,16 +30,11 @@ public class Eme_HabilidadRepositoryImpl implements Eme_HabilidadRepository {
 
     @Override
     public void create(Eme_HabilidadEntity eme_habilidad) {
-        String sqlQuery = "INSERT INTO eme_habilidad (id_eme_habilidad, id_emergencia, id_habilidad) VALUES (:idEmeHabilidad, :idEmergencia, :idHabilidad)";
+        String sqlQuery = "INSERT INTO eme_habilidad (id_emergencia, id_habilidad) VALUES (:idEmergencia, :idHabilidad)";
         try (Connection con = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
-            String sqlSet = "SELECT set_tbd_usuario(:username)";
-            con.createQuery(sqlSet)
-                    .addParameter("username", username)
-                    .executeScalar();
             con.createQuery(sqlQuery)
-                    .addParameter("idEmeHabilidad", eme_habilidad.getId_eme_habilidad())
                     .addParameter("idEmergencia", eme_habilidad.getId_emergencia())
                     .addParameter("idHabilidad", eme_habilidad.getId_habilidad())
                     .executeUpdate();

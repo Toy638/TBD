@@ -15,7 +15,7 @@ public class HabilidadController{
     @Autowired
     private HabilidadRepositoryImpl habilidadRepository;
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<HabilidadEntity>> findAll(){
         List<HabilidadEntity> habilidad = habilidadRepository.getAllHabilidades();
         return new ResponseEntity<>(habilidad, HttpStatus.OK);
@@ -31,7 +31,7 @@ public class HabilidadController{
         }
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestBody HabilidadEntity habilidad){
         habilidadRepository.createHabilidad(habilidad);
         return new ResponseEntity<>(HttpStatus.CREATED);

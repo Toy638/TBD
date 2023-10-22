@@ -153,4 +153,16 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
             return 0;
         }
     }
+
+    @Override
+    public EmergenciaEntity getFinalId() {
+        String sqlQuery = "SELECT * FROM emergencia ORDER BY id_emergencia DESC LIMIT 1";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sqlQuery)
+                    .executeAndFetchFirst(EmergenciaEntity.class);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return null;
+        }
+    }
 }

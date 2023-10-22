@@ -31,7 +31,7 @@ public class SecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/login","/api/register").permitAll()
-                        .requestMatchers("/api/emergencia/crear").hasRole("COORDINADOR")
+                        .requestMatchers("/api/emergencia/crear", "/api/habilidades/create", "/api/habilidades/listar").hasRole("COORDINADOR")
                         .requestMatchers("/api/emergencia", "/api/instituciones").hasAnyRole("VOLUNTARIO", "COORDINADOR")
                         .anyRequest().permitAll()
                 )

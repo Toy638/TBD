@@ -42,14 +42,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     @Override
     public void register(UsuarioEntity usuario) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String pass = usuario.getPassword();
-        String encrip = passwordEncoder.encode(pass);
         try (Connection connection = sql2o.beginTransaction()) {
             String query = "INSERT INTO usuario (email, password, rol) VALUES (:email, :password, :rol)";
             connection.createQuery(query, true)
                     .addParameter("email", usuario.getEmail())
-                    .addParameter("password", encrip)
+                    .addParameter("password", usuario.getPassword())
                     .addParameter("rol", usuario.getRol())
                     .executeUpdate();
             connection.commit();

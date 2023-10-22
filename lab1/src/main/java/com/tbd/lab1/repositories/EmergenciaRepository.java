@@ -12,6 +12,7 @@ public interface EmergenciaRepository {
     public EmergenciaEntity findByTarea(Long idTarea);
     public EmergenciaEntity update(EmergenciaEntity emergencia);
     public void delete(Long id);
+    public EmergenciaEntity getFinalId();
 
     void cambiarEstado(Long id);
 

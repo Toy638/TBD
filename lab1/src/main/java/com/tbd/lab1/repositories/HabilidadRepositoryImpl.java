@@ -48,17 +48,11 @@ public class HabilidadRepositoryImpl implements HabilidadRepository{
 
     @Override
     public void createHabilidad(HabilidadEntity habilidad) {
-        String sqlQuery = "INSERT INTO habilidad (id_habilidad, habilidad) VALUES (:idHabilidad, :habilidad)";
+        String sqlQuery = "INSERT INTO habilidad (habilidad) VALUES (:habilidad)";
         try (Connection con = sql2o.beginTransaction()){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
-            String sqlSet = "SELECT set_tbd_usuario(:username)";
-            con.createQuery(sqlSet)
-                    .addParameter("username", username)
-                    .executeScalar();
-
             con.createQuery(sqlQuery)
-                    .addParameter("idHabilidad", habilidad.getId_habilidad())
                     .addParameter("habilidad", habilidad.getHabilidad())
                     .executeUpdate();
             con.commit();

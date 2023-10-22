@@ -52,4 +52,10 @@ public class EmergenciaController{
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/api/emergencia/last")
+    public ResponseEntity<EmergenciaEntity> getFinalId(){
+        EmergenciaEntity emergencia = emergenciaRepository.getFinalId();
+        return new ResponseEntity<>(emergencia, HttpStatus.OK);
+    }
+
 }
