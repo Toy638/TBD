@@ -64,13 +64,14 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository{
                     .addParameter("username", username)
                     .executeScalar();
 
-            String query = "INSERT INTO voluntario (nombre, apellido, telefono, direccion, ubicacion) VALUES (:nombre, :apellido, :telefono, :direccion, :ubicacion)";
+            String query = "INSERT INTO voluntario (id_voluntario, nombre, apellido, telefono, direccion, id_usuario) VALUES (:id_voluntario, :nombre, :apellido, :telefono, :direccion, :id_usuario)";
             connection.createQuery(query)
+                    .addParameter("id_voluntario", voluntario.getId_voluntario())
                     .addParameter("nombre", voluntario.getNombre())
                     .addParameter("apellido", voluntario.getApellido())
                     .addParameter("telefono", voluntario.getTelefono())
                     .addParameter("direccion", voluntario.getDireccion())
-                    .addParameter("ubicacion", voluntario.getUbicacion())
+                    .addParameter("id_usuario", voluntario.getId_usuario())
                     .executeUpdate();
             connection.commit();
         }
@@ -105,14 +106,14 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository{
                     .addParameter("username", username)
                     .executeScalar();
 
-            String query = "UPDATE voluntario SET nombre = :nombre, apellido = :apellido, telefono = :telefono, direccion = :direccion, ubicacion = :ubicacion WHERE id_voluntario = :id";
+            String query = "UPDATE voluntario SET nombre = :nombre, apellido = :apellido, telefono = :telefono, direccion = :direccion,  id_usuario = :id_usuario WHERE id_voluntario = :id_voluntario";
             connection.createQuery(query)
+                    .addParameter("id_voluntario", voluntario.getId_voluntario())
                     .addParameter("nombre", voluntario.getNombre())
                     .addParameter("apellido", voluntario.getApellido())
                     .addParameter("telefono", voluntario.getTelefono())
                     .addParameter("direccion", voluntario.getDireccion())
-                    .addParameter("id", voluntario.getId())
-                    .addParameter("ubicacion", voluntario.getUbicacion())
+                    .addParameter("id_usuario", voluntario.getId_usuario())
                     .executeUpdate();
             connection.commit();
         }

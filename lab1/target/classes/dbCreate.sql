@@ -2,8 +2,7 @@ CREATE TABLE "usuario" (
                            "id_usuario" serial PRIMARY KEY,
                            "email" varchar(45),
                            "password" varchar(45),
-                           "rol" varchar(45),
-                           "nombre_completo" varchar(45)
+                           "rol" varchar(45)
 );
 
 CREATE TABLE "habilidad" (
