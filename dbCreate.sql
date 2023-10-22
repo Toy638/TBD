@@ -13,11 +13,9 @@ CREATE TABLE "usuario" (
   "email" varchar(45),
   "password" varchar(45),
   "rol" varchar(45),
-  "id_institucion" integer
+  "id_institucion" integer,
+  FOREIGN KEY ("id_institucion") REFERENCES "institucion" ("id_institucion")
 );
-
--- Se establece una relación de clave externa entre "usuario" e "institucion"
-ALTER TABLE "usuario" ADD FOREIGN KEY ("id_institucion") REFERENCES "institucion" ("id_institucion");
 
 -- Resto de tus tablas originales sin modificaciones
 CREATE TABLE "habilidad" (
@@ -31,7 +29,8 @@ CREATE TABLE "voluntario" (
   "apellido" varchar(255),
   "telefono" varchar(20),
   "direccion" varchar(255),
-  "id_usuario" integer unique
+  "id_usuario" integer,
+  FOREIGN KEY ("id_usuario") REFERENCES "usuario" ("id_usuario")
 );
 
 CREATE TABLE "emergencia" (
@@ -41,37 +40,47 @@ CREATE TABLE "emergencia" (
   "direccion" varchar(255),
   "fecha" DATE,
   "active" BOOLEAN,
-  "id_institucion" integer unique
+  "id_institucion" integer,
+  FOREIGN KEY ("id_institucion") REFERENCES "institucion" ("id_institucion")
 );
 
 CREATE TABLE "tarea" (
   "id_tarea" serial PRIMARY KEY,
   "asunto_tarea" varchar(255),
   "estado_tarea" BOOLEAN,
-  "id_emergencia" integer unique
+  "id_emergencia" integer,
+  FOREIGN KEY ("id_emergencia") REFERENCES "emergencia" ("id_emergencia")
 );
 
 CREATE TABLE "eme_habilidad" (
   "id_eme_habilidad" serial PRIMARY KEY,
   "id_habilidad" integer,
-  "id_emergencia" integer unique
+  "id_emergencia" integer,
+  FOREIGN KEY ("id_habilidad") REFERENCES "habilidad" ("id_habilidad"),
+  FOREIGN KEY ("id_emergencia") REFERENCES "emergencia" ("id_emergencia")
 );
 
 CREATE TABLE "ranking" (
   "id_ranking" serial PRIMARY KEY,
   "id_tarea" integer,
   "id_voluntario" integer,
-  "puntaje" integer
+  "puntaje" integer,
+  FOREIGN KEY ("id_tarea") REFERENCES "tarea" ("id_tarea"),
+  FOREIGN KEY ("id_voluntario") REFERENCES "voluntario" ("id_voluntario")
 );
 
 CREATE TABLE "tarea_habilidad" (
   "id_tarea_habilidad" serial PRIMARY KEY,
-  "id_tarea" integer unique,
-  "id_habilidad" integer unique
+  "id_tarea" integer,
+  "id_habilidad" integer,
+  FOREIGN KEY ("id_tarea") REFERENCES "tarea" ("id_tarea"),
+  FOREIGN KEY ("id_habilidad") REFERENCES "habilidad" ("id_habilidad")
 );
 
 CREATE TABLE "vol_habilidad" (
   "id_vol_habilidad" serial,
   "id_voluntario" integer,
-  "id_habilidad" integer unique
+  "id_habilidad" integer,
+  FOREIGN KEY ("id_voluntario") REFERENCES "voluntario" ("id_voluntario"),
+  FOREIGN KEY ("id_habilidad") REFERENCES "habilidad" ("id_habilidad")
 );
