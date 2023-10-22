@@ -1,6 +1,5 @@
 package com.tbd.lab1.entities;
 
-import org.sql2o.Sql2o;
 
 public class UsuarioEntity {
 

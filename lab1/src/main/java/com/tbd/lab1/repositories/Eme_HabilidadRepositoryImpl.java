@@ -1,9 +1,5 @@
 package com.tbd.lab1.repositories;
-
-
 import com.tbd.lab1.entities.Eme_HabilidadEntity;
-import com.tbd.lab1.entities.HabilidadEntity;
-import com.tbd.lab1.repositories.Eme_HabilidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
