@@ -10,13 +10,13 @@ public interface HabilidadRepository {
 
     /*public int newId();*/
 
-    public List<HabilidadEntity> getAllHabilidades();
-    public HabilidadEntity getHabilidadById(long id);
-    public void createHabilidad(HabilidadEntity habilidad);
+    List<HabilidadEntity> getAllHabilidades();
+    HabilidadEntity getHabilidadById(long id);
+    void createHabilidad(HabilidadEntity habilidad);
     //public HabilidadEntity create(HabilidadEntity habilidad)
-    public void updateHabilidad(HabilidadEntity habilidad);
+    void updateHabilidad(HabilidadEntity habilidad);
     //public HabilidadEntity update(HabilidadEntity habilidad)
-    public void deleteHabilidadById(long id);
+    void deleteHabilidadById(long id);
     //public boolean deleteHabilidadById(Long id)
 
 
