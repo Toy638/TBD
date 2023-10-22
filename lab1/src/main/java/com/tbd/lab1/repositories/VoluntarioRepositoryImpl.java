@@ -3,11 +3,13 @@ package com.tbd.lab1.repositories;
 import com.tbd.lab1.entities.VoluntarioEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
 
+@Repository
 public class VoluntarioRepositoryImpl implements VoluntarioRepository{
     private final Sql2o sql2o;
 

@@ -1,13 +1,14 @@
 package com.tbd.lab1.repositories;
-
-import com.tbd.lab1.entities.Eme_HabilidadEntity;
 import com.tbd.lab1.entities.EmergenciaEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,62 +17,55 @@ import java.util.List;
 public class EmergenciaRepositoryImpl implements EmergenciaRepository{
     @Autowired
     private Sql2o sql2o;
+    private final Logger logger = LoggerFactory.getLogger(EmergenciaRepositoryImpl.class);
 
     @Override
     public List<EmergenciaEntity> findAll() {
-        List<Eme_HabilidadEntity> eme_habilidades = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM eme_habilidad ORDER BY id_eme_habilidad ASC";
+        List<EmergenciaEntity> emergencias = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM emergencia ORDER BY id_emergencia ASC";
         try (Connection con = sql2o.open()) {
-            eme_habilidades = con.createQuery(sqlQuery).executeAndFetch(Eme_HabilidadEntity.class);
+            emergencias = con.createQuery(sqlQuery).executeAndFetch(EmergenciaEntity.class);
         } catch (Exception e) {
+            logger.error(e.getMessage());
             // Conexion a sql ha fallado
-
         }
-        return eme_habilidades;
+        return emergencias;
     }
 
     @Override
-    public void create(EmergenciaEntity emergencia) {
-        String sqlQuery = "INSERT INTO eme_habilidad (id_eme_habilidad, id_emergencia, id_habilidad) VALUES (:idEmeHabilidad, :idEmergencia, :idHabilidad)";
+    public EmergenciaEntity create(EmergenciaEntity emergencia) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        String sqlSet = "SELECT set_tbd_usuario(:username)";
+        String sqlQuery = "INSERT INTO emergencia (id_emergencia, asunto, fecha, descripcion, direccion, activa, id_institucion, region, ubicacion) VALUES (:id_emergencia, :asunto, :fecha, :descripcion, :direccion, :activa, :id_institucion, :region, :ubicacion)";
         try (Connection con = sql2o.beginTransaction()) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String username = authentication.getName();
-            String sqlSet = "SELECT set_tbd_usuario(:username)";
             con.createQuery(sqlSet)
                     .addParameter("username", username)
                     .executeScalar();
+
             con.createQuery(sqlQuery)
-                    .addParameter("idEmeHabilidad", emergencia.getId_eme_habilidad())
-                    .addParameter("idEmergencia", emergencia.getId_emergencia())
-                    .addParameter("idHabilidad", emergencia.getId_habilidad())
+                    .addParameter("asunto", emergencia.getAsunto())
+                    .addParameter("fecha", emergencia.getFecha())
+                    .addParameter("descripcion", emergencia.getDescripcion())
+                    .addParameter("direccion", emergencia.getDireccion())
+                    .addParameter("activa", emergencia.getActiva())
+                    .addParameter("id_institucion", emergencia.getId_institucion())
+                    .addParameter("region", emergencia.getRegion())
+                    .addParameter("ubicacion", emergencia.getUbicacion())
                     .executeUpdate();
             con.commit();
         }
+        return null;
     }
-
-    // Función create sin seguridad
-    /*
-    public Eme_HabilidadEntity create(Eme_HabilidadEntity eme_habilidad) {
-        try(Connection conn = sql2o.open()){
-            int insertedId = (int) conn.createQuery("INSERT INTO eme_habilidad (id_emergencia, id_habilidad) values (:id_emergencia, :id_habilidad)", true)
-                    .addParameter("id_emergencia", eme_habilidad.getId_emergencia())
-                    .addParameter("id_habilidad", eme_habilidad.getId_habilidad())
-                    .executeUpdate().getKey();
-            return eme_habilidad;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-    */
 
     @Override
     public EmergenciaEntity findById(Long id) {
-        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_eme_habilidad = :id";
+        String sqlQuery = "SELECT * FROM emergencia WHERE id_emergencia = :id";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sqlQuery)
                     .addParameter("id", id)
-                    .executeAndFetchFirst(Eme_HabilidadEntity.class);
+                    .executeAndFetchFirst(EmergenciaEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
             return null;
@@ -79,67 +73,18 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
     }
 
     @Override
-    public List<EmergenciaEntity> findByIdEmergencia(Long idEmergencia) {
-        List<Eme_HabilidadEntity> eme_habilidades = null;
-        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_emergencia = :id";
-        try (Connection con = sql2o.open()) {
-            eme_habilidades = con.createQuery(sqlQuery).addParameter("id", idEmergencia).executeAndFetch(Eme_HabilidadEntity.class);
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+    public EmergenciaEntity findByTarea(Long idTarea) {
+        try (Connection connection = sql2o.open()) {
+            String query = "SELECT e.* FROM emergencia e INNER JOIN tarea t ON t.id_emergencia = e.id_emergencia WHERE t.id_tarea = :idTarea";
+            return connection.createQuery(query)
+                    .addParameter("idTarea", idTarea)
+                    .executeAndFetchFirst(EmergenciaEntity.class);
         }
-        return eme_habilidades;
     }
 
     @Override
-    public List<EmergenciaEntity> findByIdHabilidad(Long idHabilidad) {
-        List<Eme_HabilidadEntity> eme_habilidades = null;
-        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_habilidad = :id";
-        try (Connection con = sql2o.open()) {
-            eme_habilidades = con.createQuery(sqlQuery).addParameter("id", idHabilidad).executeAndFetch(Eme_HabilidadEntity.class);
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
-        return eme_habilidades;
-    }
-
-
-    @Override
-    public void update(Eme_HabilidadEntity eme_habilidad) {
-        String sqlQuery = "UPDATE eme_habilidad SET id_emergencia = :idEmergencia, id_habilidad = :idHabilidad WHERE id_eme_habilidad = :idEmeHabilidad";
-        try (Connection con = sql2o.beginTransaction()){
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String username = authentication.getName();
-            String sqlSet = "SELECT set_tbd_usuario(:username)";
-            con.createQuery(sqlSet)
-                    .addParameter("username", username)
-                    .executeScalar();
-
-            con.createQuery(sqlQuery)
-                    .addParameter("idEmergencia", eme_habilidad.getId_emergencia())
-                    .addParameter("idHabilidad", eme_habilidad.getId_habilidad())
-                    .addParameter("idEmeHabilidad", eme_habilidad.getId_eme_habilidad())
-                    .executeUpdate();
-            con.commit();
-        }
-    }
-
-    /*
-    // Función update sin seguridad
-    public Eme_HabilidadEntity update(Eme_HabilidadEntity eme_habilidad) {
-        try(Connection conn = sql2o.open()) {
-            conn.createQuery("UPDATE eme_habilidad SET id_emergencia = :id_emergencia, id_habilidad = :id_habilidad WHERE id_eme_habilidad = :id")
-                    .addParameter("id", eme_habilidad.getId_eme_habilidad())
-                    .addParameter("id_emergencia", eme_habilidad.getId_emergencia())
-                    .addParameter("id_habilidad", eme_habilidad.getId_habilidad())
-                    .executeUpdate();
-            return eme_habilidad;
-        }
-    }
-     */
-
-    @Override
-    public void delete(Long id) {
-        String sqlQuery = "DELETE FROM eme_habilidad WHERE id_eme_habilidad = :id";
+    public EmergenciaEntity update(EmergenciaEntity emergencia) {
+        String sqlQuery = "UPDATE emergencia SET asunto = :asunto, descripcion = :descripcion, direccion = :direccion, fecha =:fecha, activa = :activa, id_institucion = :idInstitucion, region = :region, ubicacion = :ubicacion WHERE id_emergencia = :idEmergencia";
         try (Connection con = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -147,24 +92,77 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
             con.createQuery(sqlSet)
                     .addParameter("username", username)
                     .executeScalar();
-
-            con.createQuery(sqlQuery).addParameter("id", id).executeUpdate();
-            con.commit();
-        }
-    }
-
-    // Función delete sin seguridad
-    /*
-    public boolean deleteEme_HabilidadById(Long id) {
-        try(Connection conn = sql2o.open()) {
-            conn.createQuery("DELETE FROM eme_habilidad WHERE id_eme_habilidad = :id")
-                    .addParameter("id", id)
+            con.createQuery(sqlQuery)
+                    .addParameter("idEmergencia", emergencia.getId_emergencia())
+                    .addParameter("asunto", emergencia.getAsunto())
+                    .addParameter("descripcion", emergencia.getDescripcion())
+                    .addParameter("direccion", emergencia.getDireccion())
+                    .addParameter("fecha", emergencia.getFecha())
+                    .addParameter("activa", emergencia.getActiva())
+                    .addParameter("idInstitucion", emergencia.getId_institucion())
+                    .addParameter("region", emergencia.getRegion())
+                    .addParameter("ubicacion", emergencia.getUbicacion())
                     .executeUpdate();
-            return true;
+            con.commit();
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+            throw new RuntimeException(e);
+        }
+        return findById(emergencia.getId_emergencia());
+    }
+
+    @Override
+    public void delete(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        String sqlSet = "SELECT set_tbd_usuario(:username)";
+        String sqlQuery = "DELETE FROM emergencia WHERE id_emergencia = :idEmergencia";
+        try (Connection con = sql2o.beginTransaction()){
+            con.createQuery(sqlSet)
+                    .addParameter("username", username)
+                    .executeScalar();
+
+            con.createQuery(sqlQuery)
+                    .addParameter("idEmergencia", id)
+                    .executeUpdate();
+            con.commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-     */
+
+    @Override
+    public void cambiarEstado(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        String sqlSet = "SELECT set_tbd_usuario(:username)";
+        String sqlQuery = "UPDATE emergencia SET activa = NOT activa WHERE id_emergencia = :idEmergencia";
+        try (Connection con = sql2o.beginTransaction()){
+            con.createQuery(sqlSet)
+                    .addParameter("username", username)
+                    .executeScalar();
+
+            con.createQuery(sqlQuery)
+                    .addParameter("idEmergencia", id)
+                    .executeUpdate();
+            con.commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int countTareasByEmergencia(Long id) {
+        String sqlQuery = "SELECT obtener_total_tareas_activas(:id)";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sqlQuery)
+                    .addParameter("id", id)
+                    .executeScalar(Integer.class);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return 0;
+        }
+    }
 }
