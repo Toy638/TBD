@@ -23,7 +23,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     @Override
     public UsuarioEntity findById(Long id) {
-        return null;
+        try (Connection connection = sql2o.open()) {
+            String query = "SELECT * FROM usuario WHERE id = :id";
+            return connection.createQuery(query).addParameter("id", id).executeAndFetchFirst(UsuarioEntity.class);
+        }
     }
 
     @Override
@@ -50,7 +53,19 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     @Override
     public void update(UsuarioEntity usuario) {
-
+        try{
+            Connection connection = sql2o.open();
+            String query = "UPDATE usuario SET email = :email, password = :password WHERE id = :id";
+            connection.createQuery(query)
+                    .addParameter("id", usuario.getId())
+                    .addParameter("email", usuario.getEmail())
+                    .addParameter("password", usuario.getPassword())
+                    .executeUpdate();
+            connection.close();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

@@ -18,10 +18,7 @@ public class EmergenciaEntity {
     private Date fecha;
     public Boolean activa;
     private Integer id_institucion;
-    private Integer region;
 
-    @JsonSerialize(using = PGgeometrySerializer.class)
-    private PGgeometry ubicacion;
 
     public Long getId_emergencia() {
         return id_emergencia;
@@ -79,21 +76,7 @@ public class EmergenciaEntity {
         this.id_institucion = id_institucion;
     }
 
-    public Integer getRegion() {
-        return this.region;
-    }
 
-    public void setRegion(Integer region) {
-        this.region = region;
-    }
-
-    public PGgeometry getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(PGgeometry ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 
 
     @Override
@@ -106,8 +89,6 @@ public class EmergenciaEntity {
                 ", fecha=" + fecha +
                 ", activa=" + activa +
                 ", id_institucion=" + id_institucion +
-                ", region=" + region +
-                ", ubicacion=" + ubicacion +
                 '}';
     }
 }

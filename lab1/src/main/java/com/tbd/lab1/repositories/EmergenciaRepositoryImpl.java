@@ -37,12 +37,8 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
-        String sqlSet = "SELECT set_tbd_usuario(:username)";
-        String sqlQuery = "INSERT INTO emergencia (id_emergencia, asunto, fecha, descripcion, direccion, activa, id_institucion, region, ubicacion) VALUES (:id_emergencia, :asunto, :fecha, :descripcion, :direccion, :activa, :id_institucion, :region, :ubicacion)";
+        String sqlQuery = "INSERT INTO emergencia (asunto, fecha, descripcion, direccion, activa, id_institucion) VALUES (:asunto, :fecha, :descripcion, :direccion, :activa, :id_institucion)";
         try (Connection con = sql2o.beginTransaction()) {
-            con.createQuery(sqlSet)
-                    .addParameter("username", username)
-                    .executeScalar();
 
             con.createQuery(sqlQuery)
                     .addParameter("asunto", emergencia.getAsunto())
@@ -51,8 +47,6 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
                     .addParameter("direccion", emergencia.getDireccion())
                     .addParameter("activa", emergencia.getActiva())
                     .addParameter("id_institucion", emergencia.getId_institucion())
-                    .addParameter("region", emergencia.getRegion())
-                    .addParameter("ubicacion", emergencia.getUbicacion())
                     .executeUpdate();
             con.commit();
         }
@@ -84,7 +78,7 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
 
     @Override
     public EmergenciaEntity update(EmergenciaEntity emergencia) {
-        String sqlQuery = "UPDATE emergencia SET asunto = :asunto, descripcion = :descripcion, direccion = :direccion, fecha =:fecha, activa = :activa, id_institucion = :idInstitucion, region = :region, ubicacion = :ubicacion WHERE id_emergencia = :idEmergencia";
+        String sqlQuery = "UPDATE emergencia SET asunto = :asunto, descripcion = :descripcion, direccion = :direccion, fecha =:fecha, activa = :activa, id_institucion = :idInstitucion WHERE id_emergencia = :idEmergencia";
         try (Connection con = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -100,8 +94,6 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
                     .addParameter("fecha", emergencia.getFecha())
                     .addParameter("activa", emergencia.getActiva())
                     .addParameter("idInstitucion", emergencia.getId_institucion())
-                    .addParameter("region", emergencia.getRegion())
-                    .addParameter("ubicacion", emergencia.getUbicacion())
                     .executeUpdate();
             con.commit();
 
@@ -116,12 +108,8 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
-        String sqlSet = "SELECT set_tbd_usuario(:username)";
         String sqlQuery = "DELETE FROM emergencia WHERE id_emergencia = :idEmergencia";
         try (Connection con = sql2o.beginTransaction()){
-            con.createQuery(sqlSet)
-                    .addParameter("username", username)
-                    .executeScalar();
 
             con.createQuery(sqlQuery)
                     .addParameter("idEmergencia", id)

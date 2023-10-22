@@ -13,10 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import com.tbd.lab1.config.security.services.UserDetailsServiceImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
 
@@ -58,6 +55,7 @@ public class UsuarioController {
             response.put("status", "ok");
             response.put("token", jwt);
             response.put("id", usuarioRepository.getByEmail(authenticationReq.getEmail()).getId().toString());
+            response.put("rol", usuarioRepository.getByEmail(authenticationReq.getEmail()).getRol());
 
             return ResponseEntity.ok(response);
         }
@@ -73,6 +71,13 @@ public class UsuarioController {
     @PostMapping("/api/register")
     public ResponseEntity<Map<String, String>> createUser(@RequestBody UsuarioEntity usuario){
         try{
+
+            UsuarioEntity existingUser = usuarioRepository.getByEmail(usuario.getEmail());
+            if (existingUser != null) {
+                Map<String, String> response = new HashMap<>();
+                response.put("status", "error");
+                return ResponseEntity.ok(response);
+            }
             usuarioRepository.register(usuario);
 
             authenticationManager.authenticate(
@@ -83,12 +88,6 @@ public class UsuarioController {
 
             final String jwt = jwtUtilService.generateToken(userDetails);
 
-            UsuarioEntity existingUser = usuarioRepository.getByEmail(usuario.getEmail());
-            if (existingUser != null) {
-                Map<String, String> response = new HashMap<>();
-                response.put("status", "error");
-                return ResponseEntity.ok(response);
-            }
             Map<String, String> response = new HashMap<>();
             response.put("status", "registrado");
 
@@ -99,5 +98,16 @@ public class UsuarioController {
             response.put("message", "Error en el registro.");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    @GetMapping("/api/usuario/{id}")
+    public UsuarioEntity getUser(@PathVariable Long id){
+        return usuarioRepository.findById(id);
+    }
+
+    @PutMapping("/api/usuario/actualizar")
+    public ResponseEntity<Void> update(@RequestBody UsuarioEntity usuario){
+        usuarioRepository.update(usuario);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

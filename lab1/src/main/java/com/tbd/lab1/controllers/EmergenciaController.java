@@ -6,22 +6,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
-@RestController
-@RequestMapping("api/emergencia")
+@RestController()
+@CrossOrigin("*")
 public class EmergenciaController{
 
     @Autowired
     private EmergenciaRepositoryImpl emergenciaRepository;
 
-    @GetMapping
+
+    @GetMapping("/api/emergencia")
     public ResponseEntity<List<EmergenciaEntity>> findAll(){
         List<EmergenciaEntity> emergencias = emergenciaRepository.findAll();
         return new ResponseEntity<>(emergencias, HttpStatus.OK);
     }
 
-    @GetMapping("/{idEmergencia}")
+    @GetMapping("/api/emergencia/{idEmergencia}")
     public ResponseEntity<EmergenciaEntity> findById(@PathVariable Long idEmergencia){
         EmergenciaEntity emergencia = emergenciaRepository.findById(idEmergencia);
         if(emergencia != null){
@@ -31,20 +33,20 @@ public class EmergenciaController{
         }
     }
 
-    @PostMapping
+    @PostMapping("/api/emergencia/crear")
     public ResponseEntity<Void> create(@RequestBody EmergenciaEntity emergencia){
         emergenciaRepository.create(emergencia);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/{idEmergencia}")
+    @PutMapping("/api/emergencia/{idEmergencia}")
     public ResponseEntity<Void> update(@PathVariable Long idEmergencia, @RequestBody EmergenciaEntity emergencia){
         emergencia.setId_emergencia(idEmergencia);
         emergenciaRepository.update(emergencia);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/{idEmergencia}")
+    @DeleteMapping("/api/emergencia/{idEmergencia}")
     public ResponseEntity<Void> delete(@PathVariable Long idEmergencia){
         emergenciaRepository.delete(idEmergencia);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
