@@ -59,11 +59,11 @@ public class Eme_HabilidadRepositoryImpl implements Eme_HabilidadRepository {
     */
 
     @Override
-    public Eme_HabilidadEntity findById(Long id) {
-        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_eme_habilidad = :id";
+    public Eme_HabilidadEntity findById(Long id_eme_habilidad) {
+        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_eme_habilidad = :id_eme_habilidad";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sqlQuery)
-                    .addParameter("id", id)
+                    .addParameter("id_eme_habilidad", id_eme_habilidad)
                     .executeAndFetchFirst(Eme_HabilidadEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -72,11 +72,11 @@ public class Eme_HabilidadRepositoryImpl implements Eme_HabilidadRepository {
     }
 
     @Override
-    public List<Eme_HabilidadEntity> findByIdEmergencia(Long idEmergencia) {
+    public List<Eme_HabilidadEntity> findByIdEmergencia(Long id_emergencia) {
         List<Eme_HabilidadEntity> eme_habilidades = null;
-        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_emergencia = :id";
+        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_emergencia = :id_emergencia";
         try (Connection con = sql2o.open()) {
-            eme_habilidades = con.createQuery(sqlQuery).addParameter("id", idEmergencia).executeAndFetch(Eme_HabilidadEntity.class);
+            eme_habilidades = con.createQuery(sqlQuery).addParameter("id", id_emergencia).executeAndFetch(Eme_HabilidadEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -84,11 +84,11 @@ public class Eme_HabilidadRepositoryImpl implements Eme_HabilidadRepository {
     }
 
     @Override
-    public List<Eme_HabilidadEntity> findByIdHabilidad(Long idHabilidad) {
+    public List<Eme_HabilidadEntity> findByIdHabilidad(Long id_habilidad) {
         List<Eme_HabilidadEntity> eme_habilidades = null;
-        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_habilidad = :id";
+        String sqlQuery = "SELECT * FROM eme_habilidad WHERE id_habilidad = :id_habilidad";
         try (Connection con = sql2o.open()) {
-            eme_habilidades = con.createQuery(sqlQuery).addParameter("id", idHabilidad).executeAndFetch(Eme_HabilidadEntity.class);
+            eme_habilidades = con.createQuery(sqlQuery).addParameter("id", id_habilidad).executeAndFetch(Eme_HabilidadEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -131,8 +131,8 @@ public class Eme_HabilidadRepositoryImpl implements Eme_HabilidadRepository {
      */
 
     @Override
-    public void delete(Long id) {
-        String sqlQuery = "DELETE FROM eme_habilidad WHERE id_eme_habilidad = :id";
+    public void delete(Long id_eme_habilidad) {
+        String sqlQuery = "DELETE FROM eme_habilidad WHERE id_eme_habilidad = :id_eme_habilidad";
         try (Connection con = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -141,7 +141,7 @@ public class Eme_HabilidadRepositoryImpl implements Eme_HabilidadRepository {
                     .addParameter("username", username)
                     .executeScalar();
 
-            con.createQuery(sqlQuery).addParameter("id", id).executeUpdate();
+            con.createQuery(sqlQuery).addParameter("id_eme_habilidad", id_eme_habilidad).executeUpdate();
             con.commit();
         }
     }

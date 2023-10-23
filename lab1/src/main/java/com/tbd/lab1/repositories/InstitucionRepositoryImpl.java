@@ -24,11 +24,11 @@ public class InstitucionRepositoryImpl implements  InstitucionRepository{
     }
 
     @Override
-    public InstitucionEntity findById(Long id) {
-        String sqlQuery = "SELECT * FROM institucion WHERE id_institucion = :id";
+    public InstitucionEntity findById(Long id_institucion) {
+        String sqlQuery = "SELECT * FROM institucion WHERE id_institucion = :id_institucion";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sqlQuery)
-                    .addParameter("id", id)
+                    .addParameter("id_institucion", id_institucion)
                     .executeAndFetchFirst(InstitucionEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -116,7 +116,7 @@ public class InstitucionRepositoryImpl implements  InstitucionRepository{
 
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id_institucion) {
         try (Connection connection = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -125,9 +125,9 @@ public class InstitucionRepositoryImpl implements  InstitucionRepository{
                     .addParameter("username", username)
                     .executeScalar();
 
-            String query = "DELETE FROM institucion WHERE id_institucion = :idInstitucion";
+            String query = "DELETE FROM institucion WHERE id_institucion = :id_institucion";
             connection.createQuery(query)
-                    .addParameter("idInstitucion", id)
+                    .addParameter("id_institucion", id_institucion)
                     .executeUpdate();
             connection.commit();
         }

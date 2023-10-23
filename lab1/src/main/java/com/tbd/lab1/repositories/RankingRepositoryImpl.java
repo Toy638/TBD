@@ -28,11 +28,11 @@ public class RankingRepositoryImpl implements RankingRepository{
     }
 
     @Override
-    public List<RankingEntity> findByIdTarea(Long id) {
+    public List<RankingEntity> findByIdTarea(Long id_tarea) {
         List<RankingEntity> rankingList = new ArrayList<>();
         String sqlQuery = "SELECT * FROM ranking WHERE id_tarea = :id_tarea";
         try (Connection con = sql2o.open()) {
-            rankingList = con.createQuery(sqlQuery).addParameter("id_tarea", id).executeAndFetch(RankingEntity.class);
+            rankingList = con.createQuery(sqlQuery).addParameter("id_tarea", id_tarea).executeAndFetch(RankingEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -82,8 +82,8 @@ public class RankingRepositoryImpl implements RankingRepository{
      */
 
     @Override
-    public void delete(Long id) {
-        String sqlQuery = "DELETE FROM ranking WHERE id_ranking = :idRanking";
+    public void delete(Long id_ranking) {
+        String sqlQuery = "DELETE FROM ranking WHERE id_ranking = :id_ranking";
         try (Connection con = sql2o.beginTransaction()){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -93,7 +93,7 @@ public class RankingRepositoryImpl implements RankingRepository{
                     .executeScalar();
 
             con.createQuery(sqlQuery)
-                    .addParameter("idRanking", id)
+                    .addParameter("id_ranking", id_ranking)
                     .executeUpdate();
             con.commit();
         }catch (Exception e) {
@@ -124,11 +124,11 @@ public class RankingRepositoryImpl implements RankingRepository{
         }
     }
     @Override
-    public RankingEntity findById(Long id) {
-        String sqlQuery = "SELECT * FROM ranking WHERE id_ranking = :id";
+    public RankingEntity findById(Long id_ranking) {
+        String sqlQuery = "SELECT * FROM ranking WHERE id_ranking = :id_ranking";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sqlQuery)
-                    .addParameter("id", id)
+                    .addParameter("id_ranking", id_ranking)
                     .executeAndFetchFirst(RankingEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);

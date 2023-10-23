@@ -54,11 +54,11 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
     }
 
     @Override
-    public EmergenciaEntity findById(Long id) {
-        String sqlQuery = "SELECT * FROM emergencia WHERE id_emergencia = :id";
+    public EmergenciaEntity findById(Long id_emergencia) {
+        String sqlQuery = "SELECT * FROM emergencia WHERE id_emergencia = :id_emergencia";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sqlQuery)
-                    .addParameter("id", id)
+                    .addParameter("id_emergencia", id_emergencia)
                     .executeAndFetchFirst(EmergenciaEntity.class);
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -104,15 +104,15 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id_emergencia) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
-        String sqlQuery = "DELETE FROM emergencia WHERE id_emergencia = :idEmergencia";
+        String sqlQuery = "DELETE FROM emergencia WHERE id_emergencia = :id_emergencia";
         try (Connection con = sql2o.beginTransaction()){
 
             con.createQuery(sqlQuery)
-                    .addParameter("idEmergencia", id)
+                    .addParameter("id_emergencia", id_emergencia)
                     .executeUpdate();
             con.commit();
         }catch (Exception e) {
@@ -121,19 +121,19 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository{
     }
 
     @Override
-    public void cambiarEstado(Long id) {
+    public void cambiarEstado(Long id_emergencia) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
         String sqlSet = "SELECT set_tbd_usuario(:username)";
-        String sqlQuery = "UPDATE emergencia SET activa = NOT activa WHERE id_emergencia = :idEmergencia";
+        String sqlQuery = "UPDATE emergencia SET activa = NOT activa WHERE id_emergencia = :id_emergencia";
         try (Connection con = sql2o.beginTransaction()){
             con.createQuery(sqlSet)
                     .addParameter("username", username)
                     .executeScalar();
 
             con.createQuery(sqlQuery)
-                    .addParameter("idEmergencia", id)
+                    .addParameter("id_emergencia", id_emergencia)
                     .executeUpdate();
             con.commit();
         }catch (Exception e) {

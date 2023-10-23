@@ -25,12 +25,12 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository{
     }
 
     @Override
-    public VoluntarioEntity findById(Long id) {
+    public VoluntarioEntity findById(Long id_voluntario) {
         try (Connection connection = sql2o.open()) {
 
-            String query = "SELECT * FROM voluntario WHERE id = :id";
+            String query = "SELECT * FROM voluntario WHERE id_voluntario = :id_voluntario";
             return connection.createQuery(query)
-                    .addParameter("id", id)
+                    .addParameter("id_voluntario", id_voluntario)
                     .executeAndFetchFirst(VoluntarioEntity.class);
         }
     }
@@ -120,7 +120,7 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository{
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id_voluntario) {
         try (Connection connection = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -129,9 +129,9 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository{
                     .addParameter("username", username)
                     .executeScalar();
 
-            String query = "DELETE FROM voluntario WHERE id = :id";
+            String query = "DELETE FROM voluntario WHERE id_voluntario = :id_voluntario";
             connection.createQuery(query)
-                    .addParameter("id", id)
+                    .addParameter("id_voluntario", id_voluntario)
                     .executeUpdate();
             connection.commit();
         }

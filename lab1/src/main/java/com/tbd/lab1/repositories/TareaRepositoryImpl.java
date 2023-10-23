@@ -1,5 +1,6 @@
 package com.tbd.lab1.repositories;
 
+import com.tbd.lab1.entities.InstitucionEntity;
 import com.tbd.lab1.entities.TareaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -72,24 +73,24 @@ public class TareaRepositoryImpl implements TareaRepository{
     }
 
     @Override
-    public TareaEntity findById(Long id) {
-        TareaEntity tarea = null;
-        String sqlQuery = "SELECT * FROM tarea WHERE id_tarea = :idTarea";
-        try (Connection con = sql2o.open()){
-            tarea = (TareaEntity)con.createQuery(sqlQuery).addParameter("idTarea", id).executeAndFetch(TareaEntity.class);
+    public TareaEntity findById(Long id_tarea) {
+        String sqlQuery = "SELECT * FROM tarea WHERE id_tarea = :id_tarea";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sqlQuery)
+                    .addParameter("id_tarea", id_tarea)
+                    .executeAndFetchFirst(TareaEntity.class);
         } catch (Exception e) {
-            // Conexion a sql ha fallado
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e);
+            return null;
         }
-        return tarea;
     }
 
     @Override
-    public List<TareaEntity> findByIdEmergencia(Long id) {
+    public List<TareaEntity> findByIdEmergencia(Long id_emergencia) {
         List<TareaEntity> tareas = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM tarea WHERE id_emergencia = :idEmergencia";
+        String sqlQuery = "SELECT * FROM tarea WHERE id_emergencia = :id_emergencia";
         try (Connection con = sql2o.open()){
-            tareas = con.createQuery(sqlQuery).addParameter("idEmergencia", id).executeAndFetch(TareaEntity.class);
+            tareas = con.createQuery(sqlQuery).addParameter("id_emergencia", id_emergencia).executeAndFetch(TareaEntity.class);
         } catch (Exception e) {
             // Conexion a sql ha fallado
             throw new RuntimeException(e);
@@ -131,8 +132,8 @@ public class TareaRepositoryImpl implements TareaRepository{
     }
 
     @Override
-    public void delete(Long id) {
-        String sqlQuery = "DELETE FROM tarea WHERE id_tarea = :id";
+    public void delete(Long id_tarea) {
+        String sqlQuery = "DELETE FROM tarea WHERE id_tarea = :id_tarea";
         try (Connection con = sql2o.beginTransaction()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -142,7 +143,7 @@ public class TareaRepositoryImpl implements TareaRepository{
                     .executeScalar();
 
             con.createQuery(sqlQuery)
-                    .addParameter("id", id)
+                    .addParameter("id_tarea", id_tarea)
                     .executeUpdate();
             con.commit();
         } catch (Exception e) {

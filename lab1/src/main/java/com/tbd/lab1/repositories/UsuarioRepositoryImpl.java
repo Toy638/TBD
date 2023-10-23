@@ -25,10 +25,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
     }
 
     @Override
-    public UsuarioEntity findById(Long id) {
+    public UsuarioEntity findById(Long id_usuario) {
         try (Connection connection = sql2o.open()) {
-            String query = "SELECT * FROM usuario WHERE id = :id";
-            return connection.createQuery(query).addParameter("id", id).executeAndFetchFirst(UsuarioEntity.class);
+            String query = "SELECT * FROM usuario WHERE id_usuario = :id_usuario";
+            return connection.createQuery(query).addParameter("id_usuario", id_usuario).executeAndFetchFirst(UsuarioEntity.class);
         }
     }
 

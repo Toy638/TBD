@@ -27,10 +27,10 @@ public class HabilidadRepositoryImpl implements HabilidadRepository{
     }
 
     @Override
-    public HabilidadEntity getHabilidadById(long id) {
+    public HabilidadEntity getHabilidadById(long id_habilidad) {
         try (Connection conn = sql2o.open()) {
-            List<HabilidadEntity> entities = conn.createQuery("select * from habilidad where id_habilidad = :id")
-                    .addParameter("id", id)
+            List<HabilidadEntity> entities = conn.createQuery("select * from habilidad where id_habilidad = :id_habilidad")
+                    .addParameter("id_habilidad", id_habilidad)
                     .executeAndFetch(HabilidadEntity.class);
 
             if (entities.size() > 0) {
@@ -118,8 +118,8 @@ public class HabilidadRepositoryImpl implements HabilidadRepository{
 
 
     @Override
-    public void deleteHabilidadById(long id) {
-        String sqlQuery = "DELETE FROM habilidad WHERE id_habilidad = :idHabilidad";
+    public void deleteHabilidadById(long id_habilidad) {
+        String sqlQuery = "DELETE FROM habilidad WHERE id_habilidad = :id_habilidad";
         try (Connection con = sql2o.beginTransaction()){
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -129,7 +129,7 @@ public class HabilidadRepositoryImpl implements HabilidadRepository{
                     .executeScalar();
 
             con.createQuery(sqlQuery)
-                    .addParameter("idHabilidad", id)
+                    .addParameter("id_habilidad", id_habilidad)
                     .executeUpdate();
             con.commit();
         }catch (Exception e) {
