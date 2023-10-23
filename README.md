@@ -34,5 +34,8 @@ Bienvenido/a al manual de usuario.
 2.2) Ejecutar el Backend a través de IntelliJ para habilitar el servidor que permita la ejecución del código.
 
 
-2.3) "Aquí deben ir las instrucciones para correr el Frontend"
+2.3) Correr el Frontend a través de IntellIJ. Para ello se ha de abrir una terminal en la
+     carpeta “frontend” que se encuentra dentro de la carpeta “FrontEnd-TBD”. Ahí, se debe
+     ingresar el comando “npm install” y luego “npm run serve” para poder ejecutar el front
+     del código fuente.
 
