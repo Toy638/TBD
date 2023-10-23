@@ -26,7 +26,7 @@ Bienvenido/a al manual de usuario.
 2) 
 
 2.1) Para hacer funcionar la aplicación se debe abrir la aplicación pgAdmin4, se debe crear una nueva
-     base de datos llamada LAB1TBD en pgAdmin4. Una vez creada, se debe cargar el script "dbCreate.sql"
+     base de datos llamada lab1TBD en pgAdmin4. Una vez creada, se debe cargar el script "dbCreate.sql"
      para poder crear las tablas correspondientes.
 
      Luego, se debe cargar el script "loadData.sql" para poder poblar las tablas creadas con anterioridad.
