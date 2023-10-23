@@ -73,8 +73,12 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     @Override
     public void delete(Long id) {
-
+        try (Connection connection = sql2o.open()) {
+            String query = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
+            connection.createQuery(query).addParameter("id_usuario", id).executeUpdate();
+        }
     }
+
 
 /*
     @Override
