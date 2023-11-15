@@ -1,3 +1,5 @@
+CREATE EXTENSION postgis;
+
 -- Modificada la tabla de "institución" para permitir que una institución tenga muchos usuarios
 CREATE TABLE "institucion" (
   "id_institucion" serial PRIMARY KEY,
@@ -83,4 +85,26 @@ CREATE TABLE "vol_habilidad" (
   "id_habilidad" integer,
   FOREIGN KEY ("id_voluntario") REFERENCES "voluntario" ("id_voluntario"),
   FOREIGN KEY ("id_habilidad") REFERENCES "habilidad" ("id_habilidad")
+);
+
+-- Agrega una columna llamada 'geom' que almacenará ubicaciones como puntos para tarea 
+ALTER TABLE tarea
+ADD COLUMN latitud double precision,
+ADD COLUMN longitud double precision,
+ADD COLUMN geom geometry(Point, 32719);
+-- Poblar
+--UPDATE TABLE tarea SET geom = ST_MakePoint()
+
+-- Agrega una columna llamada 'geom' que almacenará puntos ubicaciones como puntos para emergencia
+ALTER TABLE emergencia
+ADD COLUMN latitud double precision,
+ADD COLUMN longitud double precision,
+ADD COLUMN geom geometry(Point, 32719);
+
+
+-- Creamos la tabla region para poder almacenarlas como polígonos
+CREATE TABLE region (
+    id serial PRIMARY KEY,
+    nombre varchar(255),
+    geom geometry(Polygon)
 );
